@@ -16,29 +16,44 @@ public class Calculadora {
         System.out.printf("Voce quer fazer fazer a operação: %d %c %d?\n", numero1, operação, numero2);
         int resultado = 0;
          
-        if(operação == '+'){
-            resultado = numero1 + numero2;
-            
-        }
-
-        else if(operação == '-'){
-            resultado = numero1 - numero2;
-            
-        }
-
-        else if(operação == '*'){ 
-            resultado = numero1 * numero2;
-            
-        }
-
-        else if(operação == '/'){
-            resultado = numero1 / numero2;
-        }
-
-        else {
-            System.out.println("\nOperador inválido!\n");
-        }
+        // if(operação == '+'){
+        //     resultado = numero1 + numero2;
+        // }
+        // else if(operação == '-'){
+        //     resultado = numero1 - numero2;
+        // }
+        // else if(operação == '*'){ 
+        //     resultado = numero1 * numero2;
+        // }
+        // else if(operação == '/'){
+        //     resultado = numero1 / numero2;
+        // }
+        // else {
+        //     System.out.println("\nOperador inválido!\n");
+        // }
         
+        switch (operação) {
+            case '+':
+                resultado = numero1 + numero2;
+                break;
+
+            case '-':
+                resultado = numero1 - numero2;
+                break;
+            
+            case '*':
+                resultado = numero1 * numero2;
+                break;
+
+            case '/':
+                resultado = numero1 / numero2;
+                break;
+            
+            default:
+                System.out.println("Operador inválido!");
+                break;
+        }
+
         System.out.println(String.format("\n%d %c %d = %d\n", numero1, operação, numero2, resultado));
         
         scanner.close();
