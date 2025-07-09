@@ -1,6 +1,7 @@
 package br.com.treinaweb.main;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Calculadora {
@@ -13,7 +14,17 @@ public class Calculadora {
             if (acao == 1) {
                 System.out.println("=== Operação Matemática ===");
                 System.out.println("Digite o primeiro número: ");
-                int numero1 = scanner.nextInt();
+                int numero1 = 0;
+
+                try{
+                    numero1 = scanner.nextInt();
+                }catch(InputMismatchException e){
+                    System.out.println(String.format("Ocorreu um erro de formato: %s. O primeiro número precisa ser inteiro.", e.getMessage()));
+                    numero1 = 1;
+                }catch(Exception e){
+                    e.printStackTrace();
+                    System.out.println("Erro desconhecido");
+                }
                 System.out.println("Digite a operação a ser feita: ");
                 char operação = scanner.next().charAt(0);
                 System.out.println("Digite o segundo número: ");
@@ -38,26 +49,24 @@ public class Calculadora {
                         resultado = numero1 / numero2;
                         break;
 
+                    case '%':
+                        resultado = numero1 % numero2;
+                        break;
+                    
                     default:
                         System.out.println("Operador inválido!");
                         break;
                 }
-
 
                 String entradaHistorico = String.format("\n%d %c %d = %d\n", numero1, operação, numero2, resultado);
 
                 historico.add(entradaHistorico);
 
                 System.out.println(entradaHistorico);
-            } else if(acao == 2){
+            } else if (acao == 2) {
                 System.out.println("=== Histórico ===");
                 System.out.println(String.format(" - Você já fez %d operações - ", historico.size()));
                 historico.forEach(itemHistorico -> System.out.println(itemHistorico));
-
-                // for(int i = 0; i < historico.size(); i++){
-                //     System.out.println(historico.get(i));
-                // }
-
             }
             System.out.println("=== O que deseja fazer agora? ===");
             System.out.println("1. Realizar outra operação\n2.Visualizar histórico\n0.Sair");
