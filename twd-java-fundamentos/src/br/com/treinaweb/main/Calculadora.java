@@ -14,24 +14,33 @@ public class Calculadora {
             if (acao == 1) {
                 System.out.println("=== Operação Matemática ===");
                 System.out.println("Digite o primeiro número: ");
-                int numero1 = 0;
-
-                try{
+                float numero1 = 0;
+                try {
                     numero1 = scanner.nextInt();
-                }catch(InputMismatchException e){
-                    System.out.println(String.format("Ocorreu um erro de formato: %s. O primeiro número precisa ser inteiro.", e.getMessage()));
+                } catch (InputMismatchException e) {
+                    System.out.println(String.format(
+                            "Ocorreu um erro de formato: %s. O primeiro número precisa ser inteiro.", e.getMessage()));
                     numero1 = 1;
-                }catch(Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
-                    System.out.println("Erro desconhecido");
+                    System.out.println("Erro desconhecido.");
                 }
+
                 System.out.println("Digite a operação a ser feita: ");
                 char operação = scanner.next().charAt(0);
-                System.out.println("Digite o segundo número: ");
-                int numero2 = scanner.nextInt();
 
-                System.out.printf("Voce quer fazer fazer a operação: %d %c %d?\n", numero1, operação, numero2);
-                int resultado = 0;
+                System.out.println("Digite o segundo número (em caso de raiz quadrada, digite 0): ");
+                float numero2 = 0;
+                try {
+                    numero2 = scanner.nextInt();
+                } catch (InputMismatchException e) {
+                    System.out.println("Ocorreu um erro de formato: %s. O primeiro número precisa ser inteiro.");
+                } catch (Exception e) {
+                    System.out.println("Erro desconhecido.");
+                }
+
+                System.out.printf("Voce quer fazer fazer a operação: %.2f %c %.2f?\n", numero1, operação, numero2);
+                double resultado = 0;
                 switch (operação) {
                     case '+':
                         resultado = numero1 + numero2;
@@ -52,13 +61,22 @@ public class Calculadora {
                     case '%':
                         resultado = numero1 % numero2;
                         break;
-                    
+
+                    case '^':
+                        resultado = Math.pow(numero1, numero2);
+                        break;
+
+                    case '√':
+                        resultado = Math.sqrt(numero1);
+                        break;
+
                     default:
                         System.out.println("Operador inválido!");
                         break;
                 }
 
-                String entradaHistorico = String.format("\n%d %c %d = %d\n", numero1, operação, numero2, resultado);
+                String entradaHistorico = String.format("\n%.2f %c %.2f = %.2f\n", numero1, operação, numero2,
+                        resultado);
 
                 historico.add(entradaHistorico);
 
