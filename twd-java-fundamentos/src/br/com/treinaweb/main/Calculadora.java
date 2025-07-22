@@ -6,9 +6,8 @@ import java.util.Scanner;
 
 public class Calculadora {
     public static void main(String[] args) {
-        // int numero1 = Integer.parseInt(scanner.nextLine());
         Scanner scanner = new Scanner(System.in);
-        int acao = 1; // 0 - Sair. 1 = Operação, 2 - Historico
+        int acao = 1; 
         ArrayList<String> historico = new ArrayList<String>();
         while (acao > 0) {
             if (acao == 1) {
